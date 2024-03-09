@@ -9,6 +9,7 @@ using std::endl;
 #define MY_EMAIL "s4072726@student.rmit.edu.au"
 
 void play_game();
+void show_game_commands();
 void show_student_info();
 void show_main_menu();
 
@@ -48,6 +49,10 @@ void show_student_info(){
 }
 
 void play_game(){
+   show_game_commands();
+}
+
+void show_game_commands(){
    cout << "You can use the following commands to play the game:" << endl << endl;
    cout << "load <g>" << endl;
    cout << "\tg: number of the game board to load" << endl;
@@ -60,4 +65,6 @@ void play_game(){
    cout << "turn_right (or r)" << endl;
    cout << "quit" << endl;
 }
+
+
 
