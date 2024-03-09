@@ -5,22 +5,29 @@
 #define MY_EMAIL "s4072726@student.rmit.edu.au"
 
 void show_student_info();
+void show_main_menu();
 
 int main(void) {
    int input = 0;
-   std::cout << "Welcome to the Vaccuum Cleaning Game!" << std::endl;
-   std::cout << "--------------------" << std::endl;
-   std::cout << "1. Play Game" << std::endl;
-   std::cout << "2. Show student information" << std::endl;
-   std::cout << "3. Quit" << std::endl << std::endl;
+   show_main_menu();
    std::cout << "Please enter your choice: ";
    std::cin >> input;
-   if (input == 2) {
+   if (input == 1) {
+
+   } else if (input == 2) {
       show_student_info();
    } else if (input == 3){
       exit(EXIT_SUCCESS);
    }
    return EXIT_SUCCESS;
+}
+
+void show_main_menu(){
+   std::cout << "Welcome to the Vaccuum Cleaning Game!" << std::endl;
+   std::cout << "--------------------" << std::endl;
+   std::cout << "1. Play Game" << std::endl;
+   std::cout << "2. Show student information" << std::endl;
+   std::cout << "3. Quit" << std::endl << std::endl;
 }
 
 void show_student_info(){
