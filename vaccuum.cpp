@@ -18,7 +18,7 @@ int main(void) {
    if (input == 2) {
       show_student_info();
    } else if (input == 3){
-      
+      exit(EXIT_SUCCESS);
    }
    return EXIT_SUCCESS;
 }
