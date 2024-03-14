@@ -1,4 +1,6 @@
 #include <iostream>
+#include "board.h"
+#include "player.h"
 
 using std::cout;
 using std::cin;
@@ -8,8 +10,9 @@ using std::endl;
 #define MY_STUDENT_NUMBER "s4072726"
 #define MY_EMAIL "s4072726@student.rmit.edu.au"
 
-void play_game();
-void show_game_commands();
+void show_tutorial();
+void show_all_game_commands();
+void show_current_game_commands();
 void show_student_info();
 void show_main_menu();
 
@@ -21,7 +24,7 @@ int main(void) {
       cin >> input;
       cout << endl;
       if (input == 1) {
-         play_game();
+         show_tutorial();
       } else if (input == 2) {
          show_student_info();
       } else if (input == 3){
@@ -48,11 +51,21 @@ void show_student_info(){
    cout << "----------------------------------------" << endl << endl;
 }
 
-void play_game(){
-   show_game_commands();
+void show_tutorial(){
+   Player player = Player();
+   Board board = Board();
+   show_all_game_commands();
+   cout << "Press enter or space to continue...";
+   std::string input;
+   cin.ignore();
+   std::getline(std::cin, input);
+   cout << endl;
+   cout << "The game board is displayed below: " << endl << endl;
+   board.display(&player);
+   show_current_game_commands();
 }
 
-void show_game_commands(){
+void show_all_game_commands(){
    cout << "You can use the following commands to play the game:" << endl << endl;
    cout << "load <g>" << endl;
    cout << "\tg: number of the game board to load" << endl;
@@ -66,5 +79,10 @@ void show_game_commands(){
    cout << "quit" << endl;
 }
 
-
+void show_current_game_commands(){
+   cout << "At this stage of the program, only these commands are acceptable:" << endl;
+   cout << "load <g>" << endl;
+   cout << "init <x>,<y>,<direction>" << endl;
+   cout << "quit";
+}
 
