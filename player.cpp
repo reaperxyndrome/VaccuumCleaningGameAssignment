@@ -3,17 +3,23 @@
 Position::Position()
 {
     //TODO
+    x = 0;
+    y = 0;
 }
 
 
 Position::Position(int x, int y)
 {
     //TODO
+    this->x = x;
+    this->y = y;
 }
 
 Player::Player()
 {
     //TODO
+    // position = Position();
+
 }
 
 void Player::initialisePlayer(Position* position, Direction direction)
