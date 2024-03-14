@@ -12,7 +12,7 @@ using std::endl;
 
 void show_tutorial();
 void show_all_game_commands();
-void show_current_game_commands();
+void show_game_commands_empty();
 void show_student_info();
 void show_main_menu();
 
@@ -58,11 +58,26 @@ void show_tutorial(){
    cout << "Press enter or space to continue...";
    std::string input;
    cin.ignore();
-   std::getline(std::cin, input);
+   std::getline(cin, input);
    cout << endl;
    cout << "The game board is displayed below: " << endl << endl;
    board.display(&player);
-   show_current_game_commands();
+   show_game_commands_empty();
+   std::string command;
+   cin >> command;
+   while (true){
+      if(command == "load"){
+         int boardId;
+         cin >> boardId;
+         board.load(boardId);
+         cout << "The game board is displayed below: " << endl << endl;
+         board.display(&player);
+         show_game_commands_empty();
+         cin >> input;
+      }
+   }
+   
+
 }
 
 void show_all_game_commands(){
@@ -79,10 +94,9 @@ void show_all_game_commands(){
    cout << "quit" << endl;
 }
 
-void show_current_game_commands(){
+void show_game_commands_empty(){
    cout << "At this stage of the program, only these commands are acceptable:" << endl;
    cout << "load <g>" << endl;
-   cout << "init <x>,<y>,<direction>" << endl;
    cout << "quit";
 }
 
