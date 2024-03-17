@@ -2,6 +2,8 @@
 
 using std::string;
 using std::vector;
+using std::cout;
+using std::endl;
 
 Helper::Helper(){}
 
@@ -60,8 +62,44 @@ void Helper::splitString(string s, vector<string>& tokens, string delimeter)
 string Helper::readInput()
 {
     string input;
-    std::getline(std::cin, input);
+    std::getline(std::cin >> std::ws, input);
     std::cout << std::endl;
 
     return input;
+}
+
+void Helper::showMainMenu(){
+   cout << "Welcome to the Vaccuum Cleaning Game!" << endl;
+   cout << "--------------------" << endl;
+   cout << "1. Play Game" << endl;
+   cout << "2. Show student information" << endl;
+   cout << "3. Quit" << endl << endl;
+}
+
+void Helper::showStudentInfo(){
+   cout << "----------------------------------------" << endl;
+   cout << "Name: " <<  MY_NAME << endl;
+   cout << "Student ID: " << MY_STUDENT_NUMBER << endl;
+   cout << "Email:" << MY_EMAIL << endl;
+   cout << "----------------------------------------" << endl << endl;
+}
+
+void Helper::showGameCommandsEmpty(){
+    cout << "At this stage of the program, only these commands are acceptable:" << endl;
+    cout << "load <g>" << endl;
+    cout << "quit" << endl << endl;
+}
+
+void Helper::showAllGameCommands(){
+    cout << "You can use the following commands to play the game:" << endl << endl;
+    cout << "load <g>" << endl;
+    cout << "\tg: number of the game board to load" << endl;
+    cout << "init <x>,<y>,<direction>" << endl;
+    cout << "\tx: horizontal position of the vacuum cleaner in the room (between 0 & 9)" << endl;
+    cout << "\ty: vertical position of the vacuum cleaner in the room (between 0 & 9)" << endl;
+    cout << "\tdirection: direction of the vacuum cleaner’s movement (north, east, south, west)" << endl;
+    cout << "forward (or f)" << endl;
+    cout << "turn_left (or l)" << endl;
+    cout << "turn_right (or r)" << endl;
+    cout << "quit" << endl;
 }

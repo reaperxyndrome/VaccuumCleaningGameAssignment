@@ -10,6 +10,10 @@
 #include <string.h>
 #include <random>
 
+#define MY_NAME "Leon Jayakusuma"
+#define MY_STUDENT_NUMBER "s4072726"
+#define MY_EMAIL "s4072726@student.rmit.edu.au"
+
 class Helper
 {
 private:
@@ -44,6 +48,14 @@ public:
     static std::string readInput();
 
     static void printInvalidInput();
+
+    static void showMainMenu();
+
+    static void showStudentInfo();
+
+    static void showAllGameCommands();
+    
+    static void showGameCommandsEmpty();
 
 };
 #endif
