@@ -7,7 +7,8 @@ Helper::Helper(){}
 
 void Helper::printInvalidInput()
 {
-    std::cout << "Invalid input.\n" << std::endl;
+    std::cout << std::endl;
+    std::cout << "Invalid input" << std::endl << std::endl;
 }
 
 // This below function does not comply to our C++ Style Guide, 
