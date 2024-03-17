@@ -1,6 +1,7 @@
 #include <iostream>
 #include "board.h"
 #include "player.h"
+#include "helper.h"
 
 using std::cout;
 using std::cin;
@@ -19,18 +20,17 @@ void show_student_info();
 void show_main_menu();
 
 int main(void) {
-   int input = 0;
+   int option = 0;
    bool return_to_main = false;
-   while(input != 1 || !return_to_main){
+   while(option != 1 || !return_to_main){
       show_main_menu();
       cout << "Please enter your choice: ";
-      cin >> input;
-      cout << endl;
-      if (input == 1) {
+      option = stoi(Helper::readInput());
+      if (option == 1) {
          show_tutorial();
-      } else if (input == 2) {
+      } else if (option == 2) {
          show_student_info();
-      } else if (input == 3){
+      } else if (option == 3){
          exit(EXIT_SUCCESS);
       }
    }
@@ -58,18 +58,24 @@ bool menu_input_empty(Board* board, Player* player){
    string command;
    while (command != "quit" || command != "load"){
       cin >> command;   
-         if (command == "load"){
+      if (command == "load"){
          string boardId;
          cin >> boardId;
-         if (Helper::isNumber(boardId)){
+         bool boardIdValid = Helper::isNumber(boardId) && 
+                              (boardId == "1" || boardId == "2");
+         if (boardIdValid){
             board->load(stoi(boardId));
             cout << "The game board is displayed below: " << endl << endl;
             board->display(player);
-      }
+         }
+         else{
+            Helper::printInvalidInput();
+            show_game_commands_empty();   
+         }
       } else if (command == "quit"){
          return true;
       } else {
-         cout << "Invalid input" << endl;
+         Helper::printInvalidInput();
          show_game_commands_empty();
       }
    }
