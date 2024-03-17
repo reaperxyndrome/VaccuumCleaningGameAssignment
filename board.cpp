@@ -5,7 +5,22 @@ using std::endl;
 
 // TODO: initialize board
 Board::Board(){
-    board = new vector<vector<Cell>>(DEFAULT_BOARD_DIMENSION, vector<Cell>(DEFAULT_BOARD_DIMENSION, EMPTY));
+    board = new vector<vector<Cell>>(
+        DEFAULT_BOARD_DIMENSION, 
+        vector<Cell>(DEFAULT_BOARD_DIMENSION, EMPTY)
+    );
+}
+
+Board::~Board(){
+    delete board;
+}
+
+void Board::reset(){
+    for (int i = 0; i < DEFAULT_BOARD_DIMENSION; i++){
+        for (int j = 0; j < DEFAULT_BOARD_DIMENSION; j++){
+            board->at(i).at(j) = EMPTY;
+        }
+    }
 }
 
 const vector<vector<Cell>> Board::BOARD_1 = {
@@ -43,9 +58,7 @@ void Board::load(int boardId){
     }
 }
 
-Board::~Board(){
-    delete board;
-}
+
 
 void Board::display(Player* player){
     for (int i = 0; i < DEFAULT_BOARD_DIMENSION+1; i++){
