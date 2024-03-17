@@ -36,9 +36,9 @@ void Game::start()
 
 void Game::loadBoard(){
     string command = " ";
-    while (command != "quit"){
+    while (command != COMMAND_QUIT){
         cin >> command;   
-        if (command == "load"){
+        if (command == COMMAND_LOAD){
             string boardId;
             cin >> boardId;
             bool boardIdValid = Helper::isNumber(boardId) && 
@@ -55,7 +55,7 @@ void Game::loadBoard(){
                 Helper::showGameCommandsEmpty();   
             }
         } else {
-            if (command != "quit"){
+            if (command != COMMAND_QUIT){
                 Helper::printInvalidInput();
                 Helper::showGameCommandsEmpty();
             }
@@ -65,9 +65,9 @@ void Game::loadBoard(){
 
 std::string Game::initializePlayer(){
     string command = " ";
-    while (command != "quit"){
+    while (command != COMMAND_QUIT){
         cin >> command;
-        if (command == "load"){
+        if (command == COMMAND_LOAD){
             string boardId;
             cin >> boardId;
             bool boardIdValid = Helper::isNumber(boardId) && 
@@ -83,7 +83,7 @@ std::string Game::initializePlayer(){
                 Helper::showGameCommandsLoaded();   
             }
         } else {
-            if (command != "quit"){
+            if (command != COMMAND_QUIT){
                 Helper::printInvalidInput();
                 Helper::showGameCommandsLoaded();
             }
@@ -91,12 +91,6 @@ std::string Game::initializePlayer(){
     }
     return command;
 }
-
-// bool Game::initializePlayer()
-// {
-//     //TODO
-//     return false; // feel free to revise this line.
-// }
 
 void Game::play()
 {
