@@ -11,18 +11,18 @@ using std::string;
 #define MY_STUDENT_NUMBER "s4072726"
 #define MY_EMAIL "s4072726@student.rmit.edu.au"
 
-void show_tutorial();
+bool show_tutorial();
 void show_all_game_commands();
 void show_game_commands_empty();
-void menu_input_empty(Board* board, Player* player);
+bool menu_input_empty(Board* board, Player* player);
 void show_student_info();
 void show_main_menu();
 
 int main(void) {
    int input = 0;
    bool return_to_main = false;
-   show_main_menu();
    while(input != 1 || !return_to_main){
+      show_main_menu();
       cout << "Please enter your choice: ";
       cin >> input;
       cout << endl;
@@ -37,8 +37,7 @@ int main(void) {
    return EXIT_SUCCESS;
 }
 
-// TODO: change "quit" to return to main menu instead of exit the program
-void show_tutorial(){
+bool show_tutorial(){
    Player player = Player();
    Board board = Board();
    show_all_game_commands();
@@ -52,11 +51,11 @@ void show_tutorial(){
    cout << "The game board is displayed below: " << endl << endl;
    board.display(&player);
    show_game_commands_empty();
-   menu_input_empty(&board, &player);
+   return menu_input_empty(&board, &player);
 }
 
-void menu_input_empty(Board* board, Player* player){
-   string command = " ";
+bool menu_input_empty(Board* board, Player* player){
+   string command;
    while (command != "quit" || command != "load"){
       cin >> command;   
          if (command == "load"){
@@ -68,12 +67,13 @@ void menu_input_empty(Board* board, Player* player){
             board->display(player);
       }
       } else if (command == "quit"){
-         exit(EXIT_SUCCESS);
+         return true;
       } else {
          cout << "Invalid input" << endl;
          show_game_commands_empty();
       }
    }
+   return false;
    
 }
 
