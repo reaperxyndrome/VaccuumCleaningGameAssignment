@@ -3,6 +3,7 @@ using std::cout;
 using std::cin;
 using std::endl;
 using std::string;
+using std::vector;
 
 Game::Game()
 {
@@ -84,9 +85,13 @@ std::string Game::initializePlayer(){
             }
             // TODO: fix initialization (input)
         } else if (command == COMMAND_INIT) {
-            string x, y, direction;
-            cin >> x >> y >> direction;
-            cin.getline()
+            string init_input = Helper::readInput();
+            vector<string> tokens;
+            Helper::splitString(init_input, tokens, ",");
+            string x = tokens[0];
+            string y = tokens[1];
+            string direction = tokens[2];
+            // cin.getline()
             bool xValid = Helper::isNumber(x) && stoi(x) >= 0 && stoi(x) < DEFAULT_BOARD_DIMENSION;
             bool yValid = Helper::isNumber(y) && stoi(y) >= 0 && stoi(y) < DEFAULT_BOARD_DIMENSION;
             bool directionValid = direction == DIRECTION_NORTH || direction == DIRECTION_EAST || 
