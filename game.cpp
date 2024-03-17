@@ -31,8 +31,6 @@ void Game::start()
     // menuInputEmpty(&board, &player);
 
     Game::loadBoard();
-    Game::initializePlayer();
-    Game::play();
 }
 
 void Game::loadBoard(){
