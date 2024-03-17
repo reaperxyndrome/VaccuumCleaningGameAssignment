@@ -35,20 +35,72 @@ void Game::start()
     Game::play();
 }
 
-bool Game::loadBoard()
-{
-    //TODO
-
-    return false; // feel free to revise this line, depending on your implementation.
+void Game::loadBoard(){
+    string command = " ";
+    while (command != "quit"){
+        cin >> command;   
+        if (command == "load"){
+            string boardId;
+            cin >> boardId;
+            bool boardIdValid = Helper::isNumber(boardId) && 
+                                (boardId == "1" || boardId == "2");
+            if (boardIdValid){
+                board->load(stoi(boardId));
+                cout << "The game board is displayed below: " << endl << endl;
+                board->display(player);
+                Helper::showGameCommandsLoaded();
+                command = initializePlayer();
+            }
+            else{
+                Helper::printInvalidInput();
+                Helper::showGameCommandsEmpty();   
+            }
+        } else {
+            if (command != "quit"){
+                Helper::printInvalidInput();
+                Helper::showGameCommandsEmpty();
+            }
+        }
+    }
 }
 
-bool Game::initializePlayer()
-{
-    //TODO
-    return false; // feel free to revise this line.
+std::string Game::initializePlayer(){
+    string command = " ";
+    while (command != "quit"){
+        cin >> command;
+        if (command == "load"){
+            string boardId;
+            cin >> boardId;
+            bool boardIdValid = Helper::isNumber(boardId) && 
+                                (boardId == "1" || boardId == "2");
+            if (boardIdValid){
+                board->load(stoi(boardId));
+                cout << "The game board is displayed below: " << endl << endl;
+                board->display(player);
+                Helper::showGameCommandsLoaded();
+            }
+            else {
+                Helper::printInvalidInput();
+                Helper::showGameCommandsLoaded();   
+            }
+        } else {
+            if (command != "quit"){
+                Helper::printInvalidInput();
+                Helper::showGameCommandsLoaded();
+            }
+        }
+    }
+    return command;
 }
+
+// bool Game::initializePlayer()
+// {
+//     //TODO
+//     return false; // feel free to revise this line.
+// }
 
 void Game::play()
 {
      //TODO
 }
+

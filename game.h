@@ -32,15 +32,15 @@ private:
 
     /**
      * Load the board. 
-     * Return true if the board is loaded and false for quiting the game.
+     * Input options for the board loading are: 1 and 2
      */
-    bool loadBoard();
+    void loadBoard();
     
     /**
      * Initialize the player. 
      * Return true if the player is initilized and false for quiting the game.
      */
-    bool initializePlayer();
+    std::string initializePlayer();
 
     /**
      * Play the game and move the player interactively.
