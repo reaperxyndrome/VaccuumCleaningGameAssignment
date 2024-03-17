@@ -5,6 +5,7 @@
 using std::cout;
 using std::cin;
 using std::endl;
+using std::string;
 
 #define MY_NAME "Leon Jayakusuma"
 #define MY_STUDENT_NUMBER "s4072726"
@@ -13,14 +14,15 @@ using std::endl;
 void show_tutorial();
 void show_all_game_commands();
 void show_game_commands_empty();
-void menu_input_empty(Board* board, Player* player);
+void menu_input_empty(string command, Board* board, Player* player);
 void show_student_info();
 void show_main_menu();
 
 int main(void) {
    int input = 0;
+   bool return_to_main = false;
    show_main_menu();
-   while(input != 1){
+   while(input != 1 || !return_to_main){
       cout << "Please enter your choice: ";
       cin >> input;
       cout << endl;
@@ -35,6 +37,45 @@ int main(void) {
    return EXIT_SUCCESS;
 }
 
+// TODO: change "quit" to return to main menu instead of exit the program
+void show_tutorial(){
+   Player player = Player();
+   Board board = Board();
+   show_all_game_commands();
+   cout << "Press enter or space to continue...";
+
+   string input;
+   cin.ignore();
+   std::getline(cin, input);
+   cout << endl;
+   
+   cout << "The game board is displayed below: " << endl << endl;
+   board.display(&player);
+   show_game_commands_empty();
+   
+   string command = " ";
+   while (command != "quit" || command != "load"){
+      cin >> command;
+      menu_input_empty(command, &board, &player);
+   }
+}
+
+void menu_input_empty(string command, Board* board, Player* player){
+   if (command == "load"){
+      string boardId;
+      cin >> boardId;
+      if (Helper::isNumber(boardId)){
+         board->load(stoi(boardId));
+         cout << "The game board is displayed below: " << endl << endl;
+         board->display(player);
+      }
+   } else if (command == "quit"){
+      exit(EXIT_SUCCESS);
+   } else {
+      cout << "Invalid input" << endl;
+      show_game_commands_empty();
+   }
+}
 
 void show_main_menu(){
    cout << "Welcome to the Vaccuum Cleaning Game!" << endl;
@@ -50,22 +91,6 @@ void show_student_info(){
    cout << "Student ID: " << MY_STUDENT_NUMBER << endl;
    cout << "Email:" << MY_EMAIL << endl;
    cout << "----------------------------------------" << endl << endl;
-}
-
-// TODO: fix main menu bug
-void show_tutorial(){
-   Player player = Player();
-   Board board = Board();
-   show_all_game_commands();
-   cout << "Press enter or space to continue...";
-   std::string input;
-   cin.ignore();
-   std::getline(cin, input);
-   cout << endl;
-   cout << "The game board is displayed below: " << endl << endl;
-   board.display(&player);
-   show_game_commands_empty();
-   menu_input_empty(&board, &player);
 }
 
 void show_all_game_commands(){
@@ -86,27 +111,4 @@ void show_game_commands_empty(){
    cout << "At this stage of the program, only these commands are acceptable:" << endl;
    cout << "load <g>" << endl;
    cout << "quit" << endl << endl;
-}
-
-
-void menu_input_empty(Board* board, Player* player){
-   std::string command = " ";
-   while (command != "quit" || command != "load"){
-      cin >> command;
-      if(command == "load"){
-         std::string boardId;
-         cin >> boardId;
-         if (Helper::isNumber(boardId)){
-            board->load(stoi(boardId));
-            cout << "The game board is displayed below: " << endl << endl;
-            board->display(player);
-            show_game_commands_empty();
-         }
-      } else if (command == "quit"){
-            exit(EXIT_SUCCESS);
-      } else {
-         cout << "Invalid input" << endl;
-         show_game_commands_empty();
-      }
-   }
 }
