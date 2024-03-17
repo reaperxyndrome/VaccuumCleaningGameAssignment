@@ -14,7 +14,7 @@ using std::string;
 void show_tutorial();
 void show_all_game_commands();
 void show_game_commands_empty();
-void menu_input_empty(string command, Board* board, Player* player);
+void menu_input_empty(Board* board, Player* player);
 void show_student_info();
 void show_main_menu();
 
@@ -52,29 +52,29 @@ void show_tutorial(){
    cout << "The game board is displayed below: " << endl << endl;
    board.display(&player);
    show_game_commands_empty();
-   
-   string command = " ";
-   while (command != "quit" || command != "load"){
-      cin >> command;
-      menu_input_empty(command, &board, &player);
-   }
+   menu_input_empty(&board, &player);
 }
 
-void menu_input_empty(string command, Board* board, Player* player){
-   if (command == "load"){
-      string boardId;
-      cin >> boardId;
-      if (Helper::isNumber(boardId)){
-         board->load(stoi(boardId));
-         cout << "The game board is displayed below: " << endl << endl;
-         board->display(player);
+void menu_input_empty(Board* board, Player* player){
+   string command = " ";
+   while (command != "quit" || command != "load"){
+      cin >> command;   
+         if (command == "load"){
+         string boardId;
+         cin >> boardId;
+         if (Helper::isNumber(boardId)){
+            board->load(stoi(boardId));
+            cout << "The game board is displayed below: " << endl << endl;
+            board->display(player);
       }
-   } else if (command == "quit"){
-      exit(EXIT_SUCCESS);
-   } else {
-      cout << "Invalid input" << endl;
-      show_game_commands_empty();
+      } else if (command == "quit"){
+         exit(EXIT_SUCCESS);
+      } else {
+         cout << "Invalid input" << endl;
+         show_game_commands_empty();
+      }
    }
+   
 }
 
 void show_main_menu(){
