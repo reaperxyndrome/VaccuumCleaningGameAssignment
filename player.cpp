@@ -18,13 +18,15 @@ Position::Position(int x, int y)
 Player::Player()
 {
     //TODO
-    // position = Position();
+    position = Position();
 
 }
 
 void Player::initialisePlayer(Position* position, Direction direction)
 {
     //TODO
+    this->position = *position;
+    this->direction = direction;
 }
 
 void Player::turnDirection(TurnDirection turnDirection)

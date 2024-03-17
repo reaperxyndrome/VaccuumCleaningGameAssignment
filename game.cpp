@@ -82,7 +82,37 @@ std::string Game::initializePlayer(){
                 Helper::printInvalidInput();
                 Helper::showGameCommandsLoaded();   
             }
-        } else {
+            // TODO: fix initialization (input)
+        } else if (command == COMMAND_INIT) {
+            string x, y, direction;
+            cin >> x >> y >> direction;
+            cin.getline()
+            bool xValid = Helper::isNumber(x) && stoi(x) >= 0 && stoi(x) < DEFAULT_BOARD_DIMENSION;
+            bool yValid = Helper::isNumber(y) && stoi(y) >= 0 && stoi(y) < DEFAULT_BOARD_DIMENSION;
+            bool directionValid = direction == DIRECTION_NORTH || direction == DIRECTION_EAST || 
+                                direction == DIRECTION_SOUTH || direction == DIRECTION_WEST;
+            if (xValid && yValid && directionValid){
+                Position position = Position(stoi(x), stoi(y));
+                if(direction == DIRECTION_NORTH){
+                    player->initialisePlayer(&position, NORTH);
+                } else if(direction == DIRECTION_EAST){
+                    player->initialisePlayer(&position, EAST);
+                } else if(direction == DIRECTION_SOUTH){
+                    player->initialisePlayer(&position, SOUTH);
+                } else if(direction == DIRECTION_WEST){
+                    player->initialisePlayer(&position, WEST);
+                }
+                cout << "The game board is displayed below: " << endl << endl;
+                board->display(player);
+                Helper::showGameCommandsLoaded();
+                return COMMAND_FORWARD;
+            }
+            else {
+                Helper::printInvalidInput();
+                Helper::showGameCommandsLoaded();
+            }
+        }
+        else {
             if (command != COMMAND_QUIT){
                 Helper::printInvalidInput();
                 Helper::showGameCommandsLoaded();
