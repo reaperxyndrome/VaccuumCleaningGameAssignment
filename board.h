@@ -100,6 +100,8 @@ public:
 
     */
     void display(Player* player);
+
+    void reset();
 };
 
 
