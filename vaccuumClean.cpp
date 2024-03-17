@@ -56,6 +56,7 @@ void menuInputEmpty(Board* board, Player* player){
             board->load(stoi(boardId));
             cout << "The game board is displayed below: " << endl << endl;
             board->display(player);
+            Helper::showGameCommandsInitialized();
          }
          else{
             Helper::printInvalidInput();

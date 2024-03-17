@@ -57,5 +57,7 @@ public:
     
     static void showGameCommandsEmpty();
 
+    static void showGameCommandsInitialized();
+
 };
 #endif

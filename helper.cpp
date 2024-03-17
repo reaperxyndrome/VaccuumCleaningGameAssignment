@@ -85,8 +85,15 @@ void Helper::showStudentInfo(){
 }
 
 void Helper::showGameCommandsEmpty(){
-    cout << "At this stage of the program, only these commands are acceptable:" << endl;
+    cout << "At this stage of the program, only two commands are acceptable:" << endl;
     cout << "load <g>" << endl;
+    cout << "quit" << endl << endl;
+}
+
+void Helper::showGameCommandsInitialized(){
+    cout << "At this stage of the program, only three commands are acceptable:" << endl;
+    cout << "load <g>" << endl;
+    cout << "init <x>,<y>,<direction>" << endl;
     cout << "quit" << endl << endl;
 }
 
