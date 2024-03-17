@@ -90,7 +90,7 @@ void Helper::showGameCommandsEmpty(){
     cout << "quit" << endl << endl;
 }
 
-void Helper::showGameCommandsInitialized(){
+void Helper::showGameCommandsLoaded(){
     cout << "At this stage of the program, only three commands are acceptable:" << endl;
     cout << "load <g>" << endl;
     cout << "init <x>,<y>,<direction>" << endl;

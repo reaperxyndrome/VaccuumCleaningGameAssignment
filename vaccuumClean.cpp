@@ -10,6 +10,7 @@ using std::string;
 
 void showTutorial();
 void menuInputEmpty(Board* board, Player* player);
+std::string menuInputLoaded(Board* board, Player* player);
 
 int main(void) {
    int option = 0;
@@ -43,10 +44,11 @@ void showTutorial(){
    menuInputEmpty(&board, &player);
 }
 
+// TODO: fix the control structure
 void menuInputEmpty(Board* board, Player* player){
-   string command;
-   cin >> command;
-   while (command != "quit"){   
+   string command = " ";
+   while (command != "quit"){
+      cin >> command;   
       if (command == "load"){
          string boardId;
          cin >> boardId;
@@ -56,16 +58,47 @@ void menuInputEmpty(Board* board, Player* player){
             board->load(stoi(boardId));
             cout << "The game board is displayed below: " << endl << endl;
             board->display(player);
-            Helper::showGameCommandsInitialized();
+            Helper::showGameCommandsLoaded();
+            command = menuInputLoaded(board, player);
          }
          else{
             Helper::printInvalidInput();
             Helper::showGameCommandsEmpty();   
          }
       } else {
-         Helper::printInvalidInput();
-         Helper::showGameCommandsEmpty();
+         if (command != "quit"){
+            Helper::printInvalidInput();
+            Helper::showGameCommandsEmpty();
+         }
       }
-      cin >> command;
    }
+}
+
+std::string menuInputLoaded(Board* board, Player* player){
+   string command = " ";
+   while (command != "quit"){
+      cin >> command;
+      if (command == "load"){
+         string boardId;
+         cin >> boardId;
+         bool boardIdValid = Helper::isNumber(boardId) && 
+                              (boardId == "1" || boardId == "2");
+         if (boardIdValid){
+            board->load(stoi(boardId));
+            cout << "The game board is displayed below: " << endl << endl;
+            board->display(player);
+            Helper::showGameCommandsLoaded();
+         }
+         else {
+            Helper::printInvalidInput();
+            Helper::showGameCommandsLoaded();   
+         }
+      } else {
+         if (command != "quit"){
+            Helper::printInvalidInput();
+            Helper::showGameCommandsLoaded();
+         }
+      }
+   }
+   return command;
 }
