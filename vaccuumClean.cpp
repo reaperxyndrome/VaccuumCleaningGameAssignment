@@ -44,7 +44,6 @@ void showTutorial(){
    menuInputEmpty(&board, &player);
 }
 
-// TODO: fix the control structure
 void menuInputEmpty(Board* board, Player* player){
    string command = " ";
    while (command != "quit"){
