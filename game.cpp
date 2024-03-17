@@ -25,6 +25,7 @@ void Game::start()
     string input;
     cin.ignore();
     
+    board->reset();
     cout << "The game board is displayed below: " << endl << endl;
     board->display(player);
     Helper::showGameCommandsEmpty();
