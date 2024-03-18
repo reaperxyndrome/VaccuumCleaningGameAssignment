@@ -58,6 +58,17 @@ void Board::load(int boardId){
     }
 }
 
+bool Board::placePlayer(Position position){
+    if (position.x < 0 || position.x >= DEFAULT_BOARD_DIMENSION || 
+        position.y < 0 || position.y >= DEFAULT_BOARD_DIMENSION){
+        return false;
+    }
+    if (board->at(position.x).at(position.y) == BLOCKED){
+        return false;
+    }
+    board->at(position.x).at(position.y) = PLAYER;
+    return true;
+}
 
 
 void Board::display(Player* player){
@@ -77,6 +88,8 @@ void Board::display(Player* player){
                 cout << EMPTY_OUTPUT;
             } else if (board->at(i-1).at(j-1) == BLOCKED){
                 cout << BLOCKED_OUTPUT;
+            } else if (board->at(i-1).at(j-1) == PLAYER){
+                player->displayDirection();
             }
         }
         cout << LINE_OUTPUT << endl;

@@ -1,5 +1,7 @@
 #include "player.h"
 
+using std::cout;
+
 Position::Position()
 {
     //TODO
@@ -49,4 +51,13 @@ void Player::updatePosition(Position position)
 void Player::displayDirection()
 {
     //TODO
+    if(this->direction == NORTH){
+        cout << DIRECTION_ARROW_OUTPUT_NORTH;
+    } else if(this->direction == EAST){
+        cout << DIRECTION_ARROW_OUTPUT_EAST;
+    } else if(this->direction == SOUTH){
+        cout << DIRECTION_ARROW_OUTPUT_SOUTH;
+    } else if(this->direction == WEST){
+        cout << DIRECTION_ARROW_OUTPUT_WEST;
+    }
 }

@@ -108,6 +108,7 @@ std::string Game::initializePlayer(){
                     player->initialisePlayer(&position, WEST);
                 }
                 cout << "The game board is displayed below: " << endl << endl;
+                board->placePlayer(position);
                 board->display(player);
                 Helper::showGameCommandsLoaded();
                 return COMMAND_FORWARD;
