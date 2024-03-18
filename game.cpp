@@ -83,7 +83,6 @@ std::string Game::initializePlayer(){
                 Helper::printInvalidInput();
                 Helper::showGameCommandsLoaded();   
             }
-            // TODO: fix initialization (input)
         } else if (command == COMMAND_INIT) {
             string init_input = Helper::readInput();
             vector<string> tokens;
@@ -111,11 +110,11 @@ std::string Game::initializePlayer(){
                 board->placePlayer(position);
                 board->display(player);
                 Helper::showGameCommandsInitialized();
-                return COMMAND_FORWARD;
+                command = play();
             }
             else {
                 Helper::printInvalidInput();
-                Helper::showGameCommandsLoaded();
+                Helper::showGameCommandsInitialized();
             }
         }
         else {
@@ -128,8 +127,9 @@ std::string Game::initializePlayer(){
     return command;
 }
 
-void Game::play()
+std::string Game::play()
 {
      //TODO
+     return " ";
 }
 
