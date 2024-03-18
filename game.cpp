@@ -159,7 +159,9 @@ std::string Game::play()
                 Helper::showGameCommandsInitialized();
             }
         }
+        
     }
+    cout << "Total player moves: " << player->moves << endl;
     return command;
 }
 

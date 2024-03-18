@@ -12,14 +12,15 @@
 #define COMMAND_FORWARD_SHORTCUT "f"
 #define COMMAND_TURN_LEFT "turn_left"
 #define COMMAND_TURN_LEFT_SHORTCUT "l"
+
 #define COMMAND_TURN_RIGHT "turn_right"
 #define COMMAND_TURN_RIGHT_SHORTCUT "r"
 #define COMMAND_QUIT "quit"
 #define COMMAND_GENERATE_RANDOM "generate"
 
-#define BLOCKED_MOVE_OUTPUT "Blocked move. Please try again."
+#define BLOCKED_MOVE_OUTPUT "There is a block in front of you. Try another move."
 #define VALID_MOVE_OUTPUT "Move is valid."
-#define OUTSIDE_BOUNDS_OUTPUT "Move is out of bounds. Please try again."
+#define OUTSIDE_BOUNDS_OUTPUT "The vacuum cleaner is at the edge of the board and cannot move further in that direction"
 
 #define DIRECTION_NORTH "north"
 #define DIRECTION_EAST "east"
