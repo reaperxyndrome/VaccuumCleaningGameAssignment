@@ -19,14 +19,16 @@ int main(void) {
    while(true){
       Helper::showMainMenu();
       cout << "Please enter your choice: " << endl;
-      option = stoi(Helper::readInput());
-      if (option == 1) {
-         // showTutorial();
-         game.start();
-      } else if (option == 2) {
-         Helper::showStudentInfo();
-      } else if (option == 3){
-         exit(EXIT_SUCCESS);
+      string input = Helper::readInput();
+      if(Helper::isNumber(input)){
+         option = stoi(input);
+         if (option == 1) {
+            game.start();
+         } else if (option == 2) {
+            Helper::showStudentInfo();
+         } else if (option == 3){
+            exit(EXIT_SUCCESS);
+         }
       }
    }
    return EXIT_SUCCESS;
