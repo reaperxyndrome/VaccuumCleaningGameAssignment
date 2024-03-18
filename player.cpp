@@ -50,8 +50,18 @@ void Player::turnDirection(TurnDirection turnDirection)
 Position Player::getNextForwardPosition()
 {
     //TODO
+    Position newPosition = Position();
+    if(this->direction == NORTH){
+        newPosition = Position(this->position.x, this->position.y - 1);
+    } else if(this->direction == EAST){
+        newPosition = Position(this->position.x + 1, this->position.y);
+    } else if(this->direction == SOUTH){
+        newPosition = Position(this->position.x, this->position.y + 1);
+    } else if(this->direction == WEST){
+        newPosition = Position(this->position.x - 1, this->position.y);
+    }
 
-    return this->position;
+    return newPosition;
 }
 
 void Player::updatePosition(Position position)
