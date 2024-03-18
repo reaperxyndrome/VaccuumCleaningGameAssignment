@@ -129,7 +129,37 @@ std::string Game::initializePlayer(){
 
 std::string Game::play()
 {
-     //TODO
-     return " ";
+    //TODO: debug why movePlayerForward is not working
+    string command = " ";
+    while (command != COMMAND_QUIT){
+        cin >> command;
+        if (command == COMMAND_FORWARD || command == COMMAND_FORWARD_SHORTCUT){
+            PlayerMove move = board->movePlayerForward(player);
+            if (move == PLAYER_MOVED){
+                board->display(player);
+                cout << VALID_MOVE_OUTPUT << endl;
+            } else if (move == CELL_BLOCKED){
+                board->display(player);
+                cout << BLOCKED_MOVE_OUTPUT << endl;
+            } else if (move == OUTSIDE_BOUNDS){
+                board->display(player);
+                cout << OUTSIDE_BOUNDS_OUTPUT << endl;
+            }
+        } else if (command == COMMAND_TURN_LEFT || command == COMMAND_TURN_LEFT_SHORTCUT){
+            player->turnDirection(TURN_LEFT);
+            board->placePlayer(player->position);
+            board->display(player);
+        } else if (command == COMMAND_TURN_RIGHT || command == COMMAND_TURN_RIGHT_SHORTCUT){
+            player->turnDirection(TURN_RIGHT);
+            board->placePlayer(player->position);
+            board->display(player);
+        } else {
+            if (command != COMMAND_QUIT){
+                Helper::printInvalidInput();
+                Helper::showGameCommandsInitialized();
+            }
+        }
+    }
+    return command;
 }
 
