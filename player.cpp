@@ -4,7 +4,6 @@ using std::cout;
 
 Position::Position()
 {
-    //TODO
     x = 0;
     y = 0;
 }
@@ -12,14 +11,12 @@ Position::Position()
 
 Position::Position(int x, int y)
 {
-    //TODO
     this->x = x;
     this->y = y;
 }
 
 Player::Player()
 {
-    //TODO
     position = Position();
     moves = 0;
 
@@ -27,7 +24,6 @@ Player::Player()
 
 void Player::initialisePlayer(Position* position, Direction direction)
 {
-    //TODO
     this->position = *position;
     this->direction = direction;
     moves = 0;
@@ -35,7 +31,6 @@ void Player::initialisePlayer(Position* position, Direction direction)
 
 void Player::turnDirection(TurnDirection turnDirection)
 {
-    //TODO
     if(turnDirection == TURN_RIGHT){
         if(direction == NORTH) direction = EAST;
         else if(direction == EAST) direction = SOUTH;
@@ -51,7 +46,6 @@ void Player::turnDirection(TurnDirection turnDirection)
 
 Position Player::getNextForwardPosition()
 {
-    //TODO
     Position newPosition = Position();
     if(this->direction == NORTH){
         newPosition = Position(this->position.x, this->position.y - 1);
@@ -68,14 +62,12 @@ Position Player::getNextForwardPosition()
 
 void Player::updatePosition(Position position)
 {
-    //TODO
     this->position = getNextForwardPosition();
     ++moves;
 }
 
 void Player::displayDirection()
 {
-    //TODO
     if(this->direction == NORTH){
         cout << DIRECTION_ARROW_OUTPUT_NORTH;
     } else if(this->direction == EAST){
