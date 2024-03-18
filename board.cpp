@@ -63,10 +63,10 @@ bool Board::placePlayer(Position position){
         position.y < 0 || position.y >= DEFAULT_BOARD_DIMENSION){
         return false;
     }
-    if (board->at(position.x).at(position.y) == BLOCKED){
+    if (board->at(position.y).at(position.x) == BLOCKED){
         return false;
     }
-    board->at(position.x).at(position.y) = PLAYER;
+    board->at(position.y).at(position.x) = PLAYER;
     return true;
 }
 
