@@ -21,6 +21,7 @@ Player::Player()
 {
     //TODO
     position = Position();
+    moves = 0;
 
 }
 
@@ -29,6 +30,7 @@ void Player::initialisePlayer(Position* position, Direction direction)
     //TODO
     this->position = *position;
     this->direction = direction;
+    moves = 0;
 }
 
 void Player::turnDirection(TurnDirection turnDirection)
@@ -67,6 +69,8 @@ Position Player::getNextForwardPosition()
 void Player::updatePosition(Position position)
 {
     //TODO
+    this->position = getNextForwardPosition();
+    ++moves;
 }
 
 void Player::displayDirection()
