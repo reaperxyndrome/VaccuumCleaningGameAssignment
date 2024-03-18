@@ -96,3 +96,20 @@ void Board::display(Player* player){
     }
     cout << endl;
 }
+
+PlayerMove Board::movePlayerForward(Player* player){
+    Position nextPosition = player->getNextForwardPosition();
+    PlayerMove player_move = PLAYER_MOVED;
+    if (nextPosition.x < 0 || nextPosition.x >= DEFAULT_BOARD_DIMENSION || 
+        nextPosition.y < 0 || nextPosition.y >= DEFAULT_BOARD_DIMENSION){
+        player_move = OUTSIDE_BOUNDS;
+    }
+    else if (board->at(nextPosition.y).at(nextPosition.x) == BLOCKED){
+        player_move = CELL_BLOCKED;
+    }
+    if (player_move == PLAYER_MOVED){
+        player->updatePosition(nextPosition);
+    
+    }
+    return player_move;
+}
