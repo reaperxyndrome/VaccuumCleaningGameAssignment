@@ -87,34 +87,40 @@ std::string Game::initializePlayer(){
             string init_input = Helper::readInput();
             vector<string> tokens;
             Helper::splitString(init_input, tokens, ",");
-            string x = tokens[0];
-            string y = tokens[1];
-            string direction = tokens[2];
-            // cin.getline()
-            bool xValid = Helper::isNumber(x) && stoi(x) >= 0 && stoi(x) < DEFAULT_BOARD_DIMENSION;
-            bool yValid = Helper::isNumber(y) && stoi(y) >= 0 && stoi(y) < DEFAULT_BOARD_DIMENSION;
-            bool directionValid = direction == DIRECTION_NORTH || direction == DIRECTION_EAST || 
-                                direction == DIRECTION_SOUTH || direction == DIRECTION_WEST;
-            if (xValid && yValid && directionValid){
-                Position position = Position(stoi(x), stoi(y));
-                if(direction == DIRECTION_NORTH){
-                    player->initialisePlayer(&position, NORTH);
-                } else if(direction == DIRECTION_EAST){
-                    player->initialisePlayer(&position, EAST);
-                } else if(direction == DIRECTION_SOUTH){
-                    player->initialisePlayer(&position, SOUTH);
-                } else if(direction == DIRECTION_WEST){
-                    player->initialisePlayer(&position, WEST);
+            if(tokens.size() == 3){
+                string x = tokens[0];
+                string y = tokens[1];
+                string direction = tokens[2];
+                // cin.getline()
+                bool xValid = Helper::isNumber(x) && stoi(x) >= 0 && stoi(x) < DEFAULT_BOARD_DIMENSION;
+                bool yValid = Helper::isNumber(y) && stoi(y) >= 0 && stoi(y) < DEFAULT_BOARD_DIMENSION;
+                bool directionValid = direction == DIRECTION_NORTH || direction == DIRECTION_EAST || 
+                                    direction == DIRECTION_SOUTH || direction == DIRECTION_WEST;
+                if (xValid && yValid && directionValid){
+                    Position position = Position(stoi(x), stoi(y));
+                    if(direction == DIRECTION_NORTH){
+                        player->initialisePlayer(&position, NORTH);
+                    } else if(direction == DIRECTION_EAST){
+                        player->initialisePlayer(&position, EAST);
+                    } else if(direction == DIRECTION_SOUTH){
+                        player->initialisePlayer(&position, SOUTH);
+                    } else if(direction == DIRECTION_WEST){
+                        player->initialisePlayer(&position, WEST);
+                    }
+                    cout << "The game board is displayed below: " << endl << endl;
+                    board->placePlayer(position);
+                    board->display(player);
+                    Helper::showGameCommandsInitialized();
+                    command = play();
                 }
-                cout << "The game board is displayed below: " << endl << endl;
-                board->placePlayer(position);
-                board->display(player);
-                Helper::showGameCommandsInitialized();
-                command = play();
+                else{
+                    Helper::printInvalidInput();
+                    Helper::showGameCommandsLoaded();
+                }
             }
             else {
                 Helper::printInvalidInput();
-                Helper::showGameCommandsInitialized();
+                Helper::showGameCommandsLoaded();
             }
         }
         else {
