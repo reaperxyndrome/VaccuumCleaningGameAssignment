@@ -17,6 +17,10 @@
 #define COMMAND_QUIT "quit"
 #define COMMAND_GENERATE_RANDOM "generate"
 
+#define BLOCKED_MOVE_OUTPUT "Blocked move. Please try again."
+#define VALID_MOVE_OUTPUT "Move is valid."
+#define OUTSIDE_BOUNDS_OUTPUT "Move is out of bounds. Please try again."
+
 #define DIRECTION_NORTH "north"
 #define DIRECTION_EAST "east"
 #define DIRECTION_SOUTH "south"
