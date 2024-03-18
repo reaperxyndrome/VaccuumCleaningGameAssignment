@@ -136,14 +136,14 @@ std::string Game::play()
         if (command == COMMAND_FORWARD || command == COMMAND_FORWARD_SHORTCUT){
             PlayerMove move = board->movePlayerForward(player);
             if (move == PLAYER_MOVED){
-                board->display(player);
                 cout << VALID_MOVE_OUTPUT << endl;
+                board->display(player);
             } else if (move == CELL_BLOCKED){
-                board->display(player);
                 cout << BLOCKED_MOVE_OUTPUT << endl;
-            } else if (move == OUTSIDE_BOUNDS){
                 board->display(player);
+            } else if (move == OUTSIDE_BOUNDS){
                 cout << OUTSIDE_BOUNDS_OUTPUT << endl;
+                board->display(player);
             }
         } else if (command == COMMAND_TURN_LEFT || command == COMMAND_TURN_LEFT_SHORTCUT){
             player->turnDirection(TURN_LEFT);

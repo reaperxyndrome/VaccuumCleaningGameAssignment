@@ -108,8 +108,10 @@ PlayerMove Board::movePlayerForward(Player* player){
         player_move = CELL_BLOCKED;
     }
     if (player_move == PLAYER_MOVED){
+        Position currentPosition = player->position;
+        board->at(currentPosition.y).at(currentPosition.x) = EMPTY;
         player->updatePosition(nextPosition);
-    
+        placePlayer(nextPosition);
     }
     return player_move;
 }
