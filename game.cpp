@@ -20,43 +20,60 @@ Game::~Game()
 
 void Game::start()
 {
+    // Display all game commands to the user
     Helper::showAllGameCommands();
     cout << "Press enter or space to continue..." << endl;
 
+    // Wait for user input (enter or space) to continue
     string input;
     cin.ignore();
     
-    board->reset();
+    board->reset(); // Reset the game board to its initial state
     cout << "The game board is displayed below: " << endl << endl;
-    board->display(player);
-    Helper::showGameCommandsEmpty();
-    // menuInputEmpty(&board, &player);
+    board->display(player); // Display the current state of the game board
 
+    // Show the game commands available when the board is empty
+    Helper::showGameCommandsEmpty();
+
+    // Load the game board with the initial game setup
     Game::loadBoard();
 }
 
 void Game::loadBoard(){
     string command = " ";
+    // Loop until the user enters the quit command
     while (command != COMMAND_QUIT){
         cin >> command;   
+        // If the user enters the load command
         if (command == COMMAND_LOAD){
             string boardId;
             cin >> boardId;
+            // Check if the board ID entered by the user is valid
             bool boardIdValid = Helper::isNumber(boardId) && 
                                 (boardId == "1" || boardId == "2");
+            // If the board ID is valid
             if (boardIdValid){
+                // Load the specified board
                 board->load(stoi(boardId));
                 cout << "The game board is displayed below: " << endl << endl;
+                // Display the loaded board
                 board->display(player);
+                // Show the commands available after the board is loaded
                 Helper::showGameCommandsLoaded();
+                // Initialize the player
                 command = initializePlayer();
             }
+            // If the board ID is not valid
             else{
+                // Print an error message and show the commands available when the board is empty
                 Helper::printInvalidInput();
                 Helper::showGameCommandsEmpty();   
             }
-        } else {
+        } 
+        // If the user enters an invalid command
+        else {
             if (command != COMMAND_QUIT){
+                // Print an error message and show the commands available when the board is empty
                 Helper::printInvalidInput();
                 Helper::showGameCommandsEmpty();
             }
