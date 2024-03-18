@@ -97,6 +97,15 @@ void Helper::showGameCommandsLoaded(){
     cout << "quit" << endl << endl;
 }
 
+void Helper::showGameCommandsInitialized(){
+    cout << "At this stage of the program, only four commands are acceptable:" << endl;
+    cout << "forward (or f)" << endl;
+    cout << "turn_left (or l)" << endl;
+    cout << "turn_right (or r)" << endl;
+    cout << "quit" << endl << endl;
+
+}
+
 void Helper::showAllGameCommands(){
     cout << "You can use the following commands to play the game:" << endl << endl;
     cout << "load <g>" << endl;

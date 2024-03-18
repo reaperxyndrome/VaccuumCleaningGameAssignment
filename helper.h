@@ -59,5 +59,7 @@ public:
 
     static void showGameCommandsLoaded();
 
+    static void showGameCommandsInitialized();
+
 };
 #endif

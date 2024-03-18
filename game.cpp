@@ -110,7 +110,7 @@ std::string Game::initializePlayer(){
                 cout << "The game board is displayed below: " << endl << endl;
                 board->placePlayer(position);
                 board->display(player);
-                Helper::showGameCommandsLoaded();
+                Helper::showGameCommandsInitialized();
                 return COMMAND_FORWARD;
             }
             else {
