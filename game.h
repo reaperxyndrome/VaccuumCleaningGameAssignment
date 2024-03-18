@@ -38,14 +38,15 @@ private:
     
     /**
      * Initialize the player. 
-     * Return true if the player is initilized and false for quiting the game.
+     * Return command "quit" for quiting the game.
      */
     std::string initializePlayer();
 
     /**
      * Play the game and move the player interactively.
+     * Return command "quit" for quiting the game.
      */
-    void play();
+    std::string play();
 
 
 public:
