@@ -46,29 +46,7 @@ void Game::loadBoard(){
         cin >> command;   
         // If the user enters the load command
         if (command == COMMAND_LOAD){
-            string boardId;
-            cin >> boardId;
-            // Check if the board ID entered by the user is valid
-            bool boardIdValid = Helper::isNumber(boardId) && 
-                                (boardId == "1" || boardId == "2");
-            // If the board ID is valid
-            if (boardIdValid){
-                // Load the specified board
-                board->load(stoi(boardId));
-                cout << "The game board is displayed below: " << endl << endl;
-                // Display the loaded board
-                board->display(player);
-                // Show the commands available after the board is loaded
-                Helper::showGameCommandsLoaded();
-                // Initialize the player
-                command = initializePlayer();
-            }
-            // If the board ID is not valid
-            else{
-                // Print an error message and show the commands available when the board is empty
-                Helper::printInvalidInput();
-                Helper::showGameCommandsEmpty();   
-            }
+            handleLoadCommand(&command, true);
         } 
         // If the user enters an invalid command
         else {
@@ -81,25 +59,32 @@ void Game::loadBoard(){
     }
 }
 
+void Game::handleLoadCommand(std::string* command, bool initializePlayer){
+    string boardId;
+    cin >> boardId;
+    bool boardIdValid = Helper::isNumber(boardId) && 
+                        (boardId == "1" || boardId == "2");
+    if (boardIdValid){
+        board->load(stoi(boardId));
+        cout << "The game board is displayed below: " << endl << endl;
+        board->display(player);
+        Helper::showGameCommandsLoaded();
+        if (initializePlayer){
+            *command = this->initializePlayer();
+        }
+    }
+    else {
+        Helper::printInvalidInput();
+        Helper::showGameCommandsLoaded();   
+    }
+}
+
 std::string Game::initializePlayer(){
     string command = " ";
     while (command != COMMAND_QUIT){
         cin >> command;
         if (command == COMMAND_LOAD){
-            string boardId;
-            cin >> boardId;
-            bool boardIdValid = Helper::isNumber(boardId) && 
-                                (boardId == "1" || boardId == "2");
-            if (boardIdValid){
-                board->load(stoi(boardId));
-                cout << "The game board is displayed below: " << endl << endl;
-                board->display(player);
-                Helper::showGameCommandsLoaded();
-            }
-            else {
-                Helper::printInvalidInput();
-                Helper::showGameCommandsLoaded();   
-            }
+            handleLoadCommand(&command, false);
         } else if (command == COMMAND_INIT) {
             string init_input = Helper::readInput();
             vector<string> tokens;
@@ -154,6 +139,49 @@ std::string Game::initializePlayer(){
         }
     }
     return command;
+}
+
+void Game::handleInitCommand(std::string* command){
+    string init_input = Helper::readInput();
+    vector<string> tokens;
+    Helper::splitString(init_input, tokens, ",");
+    if(tokens.size() == 3){
+        string x = tokens[0];
+        string y = tokens[1];
+        string direction = tokens[2];
+        // cin.getline()
+        bool xValid = Helper::isNumber(x) && stoi(x) >= 0 && stoi(x) < DEFAULT_BOARD_DIMENSION;
+        bool yValid = Helper::isNumber(y) && stoi(y) >= 0 && stoi(y) < DEFAULT_BOARD_DIMENSION;
+        bool directionValid = direction == DIRECTION_NORTH || direction == DIRECTION_EAST || 
+                            direction == DIRECTION_SOUTH || direction == DIRECTION_WEST;
+        if (xValid && yValid && directionValid){
+            Position position = Position(stoi(x), stoi(y));
+            if(direction == DIRECTION_NORTH){
+                player->initialisePlayer(&position, NORTH);
+            } else if(direction == DIRECTION_EAST){
+                player->initialisePlayer(&position, EAST);
+            } else if(direction == DIRECTION_SOUTH){
+                player->initialisePlayer(&position, SOUTH);
+            } else if(direction == DIRECTION_WEST){
+                player->initialisePlayer(&position, WEST);
+            }
+            cout << "The game board is displayed below: " << endl << endl;
+            bool success = board->placePlayer(position);
+            if (success){
+                board->display(player);
+                Helper::showGameCommandsInitialized();
+                *command = play();
+            }
+            else{
+                Helper::printInvalidInput();
+                Helper::showGameCommandsLoaded();
+            }
+        }
+        else{
+            Helper::printInvalidInput();
+            Helper::showGameCommandsLoaded();
+        }
+    }
 }
 
 std::string Game::play()

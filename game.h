@@ -53,6 +53,10 @@ private:
      */
     std::string play();
 
+    void handleLoadCommand(std::string* command, bool initializePlayer);
+
+    void handleInitCommand(std::string* command);
+
 
 public:
 
