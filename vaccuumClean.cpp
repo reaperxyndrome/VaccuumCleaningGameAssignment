@@ -24,10 +24,19 @@ int main(void) {
       // Display the main menu and get user's menu choice
       Helper::showMainMenu();
       cout << "Please enter your choice: " << endl;
-      string input = Helper::readInput();
-      
+      string input;
+      // cin.clear();
+      // clearerr(stdin);
+      if(!std::getline(std::cin, input) || input.empty()) {
+        cin.clear();
+        clearerr(stdin);
+        cout << "Invalid Input." << endl;
+      }
+
+      // input = Helper::readInput();
+
       // Process user's input, proceed if valid
-      if(Helper::isNumber(input)){
+      else if(Helper::isNumber(input)){
          option = stoi(input);
 
          // Start the game, show student info, or exit based on user's choice
@@ -38,7 +47,11 @@ int main(void) {
          } else if (option == 3){
             exit(EXIT_SUCCESS);
          }
+         std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+
       }
+
+
    }
    return EXIT_SUCCESS;
 }
